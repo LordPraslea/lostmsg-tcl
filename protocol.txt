@@ -1,0 +1,71 @@
+File sending:
+The one sending the file is the Client socket and the one recieving is the Server socket.
+The Server waits for a connection. The client connects and sends uniqueFileID
+The server acknowledges the uniqueFileID or disconnects the socket and terminates the Server connection (failsafe for hackers etc)
+If acknowledgement => Client may send file
+OR
+since you trust the person you're sending an item to just create an uniqueFileID
+
+TODO.. implement flooding protection on server part:
+- Ignore IP for 7 minutes after 5 consecutive failed logins (lockdown on username?)
+- Ignore user for 1 minute after flooding more than 10 commands in 5 seconds (bot protection)
+
+Sending "greater length" files..
+
+TODO'S
+
+MultiChat (invite multiple people?)
+Channels: Create channels like in IRC..?
+Admin mode:D
+Skype "cloud node" mode.. using computational power to do stuffs:D. 
+	Sharing your computer power with friends using TCL-DS
+Have the choice to go on a private server with your partner(s) while keeping you connected to the original server.
+You can chose who the host will be by vote or automatically chose to host the server (be careful, as the person might get to know YOUR IP!)
+Do random swapping of who will host:)?
+Everyone hosts a server, send random messages to server? (Distributed serving?)
+
+
+Audio/Video mode not a priority..+ if ever best a C library
+
+
+Client to Server
+c -> want to connect
+1	auth <username> <password>
+2 	register <username> <password> <e-mail> <nickname> <full name> <birthdate> <Gender> <Location>
+3	pm <username/channel> <text> 
+4	buzz/get attention of <username> 
+5	Send file: <username> <filename> <size>
+6	Accept file from user... <username> <uniqueFileID> <- Opened sock and ready for the file
+7 	Reject file from user: <username> <uniqueFileID> <- no thanks
+8 	Add  <username> to friend list
+9 	I Accept <username> as my friend
+10	I don't want <username> as my friend
+11	Delete  <username> from friend list
+12 	Ignore <username>
+13	Unignore <username>
+
+
+Server to Client
+c Connection succesful
+0 	Not enough data given for command
+1 	please auth
+2 	auth ok
+3 	Inexistent Username:
+		1 Not Registered
+		2 No Msg
+		3 Everything else
+4 	auth not ok wrong password
+5 	Username already exists
+6 	Username registered
+7 	Message From <username/channel> <message> [<time sent> this is used for offline messages..]
+8 	Someone wants to send you a file <username> <file> <size> <uniqueFileID>
+9 	User is ready  to get file: <username> <uniqueFileID> <UsernameIp>
+10 	Username rejected file transfer: <username> <uniqueFileID>
+11 	<username> wants to be your friend
+12	<username> accepted your friendship
+13	<username> rejected your friendship
+14 	Offline messages:
+15 	You have been logged out because someone else logged in on another computer.
+16 	You have been kicked from the server by an Admin
+17 Buzzed by person
+database
